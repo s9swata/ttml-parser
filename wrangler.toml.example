@@ -1,0 +1,26 @@
+name = "ttml-lyrics-aligner"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+
+[[queues.producers]]
+  queue = "ttml-queue"
+  binding = "ttml_queue"
+
+[[queues.consumers]]
+  queue = "ttml-queue"
+  max_batch_size = 1
+  max_retries = 3
+  max_batch_timeout = 60
+
+[[kv_namespaces]]
+  binding = "TTML_CACHE"
+  id = "<your-kv-namespace-id>"
+  preview_id = "<your-kv-namespace-id>"
+
+[[r2_buckets]]
+  binding = "TTML_BUCKET"
+  bucket_name = "<your-bucket-name>"
+  preview_bucket_name = "<your-bucket-name>"
+
+[vars]
+RATE_LIMIT_PER_MINUTE = "20"
